@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "prettier-format": "prettier --config .prettierrc src/**/*.ts --write",
-    "build": "rimraf ./build && tsc",
+    "prettier-format-check": "prettier --config --check .prettierrc src/**/*.ts --write",
+    "build": "rimraf ./build && tsc && ncc build",
     "dev:build": "tsc -w",
     "dev:run": "nodemon build/index.js",
     "dev": "concurrently npm:dev:*",
