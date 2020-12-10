@@ -24,9 +24,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      - run: npm audit
       - run: npm ci
       - run: npm run build
-      - run: npm run prettier-format-check
+      - run: npm run prettier-format-check && npm run lint
       # - run: npm test
       - name: Verify no unstaged changes
         if: runner.os != 'windows'
