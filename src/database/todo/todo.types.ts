@@ -3,6 +3,7 @@ import { Document, Model, ObjectId } from 'mongoose';
 export interface ITodo {
     title: string;
     description: string;
+    user_id: ObjectId;
     dateOfEntry?: Date;
     lastUpdated?: Date;
 }

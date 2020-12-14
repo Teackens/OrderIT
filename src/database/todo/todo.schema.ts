@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 import { sameTitle, setLastUpdated } from './todo.methods';
-import { findByUser, findOneOrCreate } from './todo.statics';
+import { findByCreatedUser, findOneOrCreate } from './todo.statics';
 
 const UserSchema = new Schema({
     firstName: String,
@@ -17,7 +17,7 @@ const UserSchema = new Schema({
 });
 
 UserSchema.statics.findOneOrCreate = findOneOrCreate;
-UserSchema.statics.findByUser = findByUser;
+UserSchema.statics.findByCreatedUser = findByCreatedUser;
 
 UserSchema.methods.setLastUpdated = setLastUpdated;
 UserSchema.methods.sameTitle = sameTitle;

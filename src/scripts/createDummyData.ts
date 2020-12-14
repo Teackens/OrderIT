@@ -1,4 +1,3 @@
-import { create } from 'domain';
 import { connect, disconnect } from '../database/database';
 import { UserModel } from '../database/users/users.model';
 
