@@ -1,15 +1,18 @@
 import mongoose from 'mongoose';
 import { UserModel } from './users/users.model';
+import { TodoModel } from './todo/todo.model';
+import { IUserModel } from './users/users.types';
+import { ITodoModel } from './todo/todo.types';
 
 let database: mongoose.Connection;
 
-export const connect = async () => {
+export const connect = (): { UserModel: IUserModel; TodoModel: ITodoModel } => {
     // add your own uri below
     const uri = 'mongodb://127.0.0.1:27017';
 
     if (database) {
         console.log('there is a db connection');
-        return;
+        return { UserModel, TodoModel };
     }
     try {
         mongoose.connect(uri, {
@@ -31,15 +34,12 @@ export const connect = async () => {
         console.error(error);
     }
 
-    return {
-        UserModel
-    };
+    return { UserModel, TodoModel };
 };
 
 export const disconnect = (): void => {
     if (!database) {
         return;
     }
-
     mongoose.disconnect();
 };
