@@ -2,24 +2,27 @@
   "name": "order_it",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
     "lint": "eslint . --ext .ts",
     "prettier-format": "prettier --config .prettierrc src/**/*.ts --write",
     "prettier-format-check": "prettier --config --check .prettierrc src/**/*.ts --write",
     "build": "rimraf ./build && tsc",
     "dev:build": "tsc -w",
-    "dev:run": "nodemon build/index.js",
+    "dev:run": "nodemon build/server.js",
     "dev": "concurrently npm:dev:*",
-    "start": "npm run build && node build/index.js"
+    "start": "npm run build && node build/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "eslint-plugin-no-loops": "^0.3.0"
+    "@types/mongoose": "^5.10.2",
+    "eslint-plugin-no-loops": "^0.3.0",
+    "mongoose": "^5.11.7"
   },
   "devDependencies": {
+    "@types/express": "^4.17.9",
     "@types/node": "^14.14.10",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
@@ -27,6 +30,7 @@
     "eslint": "^7.15.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.2.0",
+    "express": "^4.17.1",
     "husky": "^4.3.5",
     "nodemon": "^2.0.6",
     "prettier": "^2.2.1",
