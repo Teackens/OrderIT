@@ -1,8 +1,9 @@
 import { Schema } from 'mongoose';
 import { sameLastName, setLastUpdated } from './users.methods';
+import { User } from './users.model';
 import { findByAge, findOneOrCreate } from './users.statics';
 
-const UserSchema = new Schema({
+const UserSchema: Schema<User> = new Schema({
     firstName: String,
     lastName: String,
     age: Number,

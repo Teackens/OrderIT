@@ -1,22 +1,21 @@
 import { Document, Model, ObjectId } from 'mongoose';
 
-export interface ITodo {
+export declare interface ITodo {
     title: string;
     description: string;
-    user_id: ObjectId;
     dateOfEntry?: Date;
     lastUpdated?: Date;
 }
 
-export interface ITodoDocument extends ITodo, Document {
-    setLastUpdated: (this: ITodoDocument) => Promise<void>;
-    sameTitle: (this: ITodoDocument) => Promise<Document[]>;
+export declare interface TodoDocument extends ITodo, Document {
+    setLastUpdated: (this: TodoDocument) => Promise<void>;
+    sameTitle: (this: TodoDocument) => Promise<Document[]>;
 }
 
-export interface ITodoModel extends Model<ITodoDocument> {
+export declare interface TodoModel extends Model<TodoDocument> {
     findOneOrCreate: (
         this: ITodo,
         { title, description }: { title: string; description: string }
-    ) => Promise<ITodoDocument>;
-    findByUser: (this: ITodo, id: ObjectId) => Promise<ITodoDocument[]>;
+    ) => Promise<TodoDocument>;
+    findByUser: (this: ITodo, id: ObjectId) => Promise<TodoDocument[]>;
 }

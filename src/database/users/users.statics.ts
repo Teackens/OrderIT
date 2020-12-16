@@ -1,25 +1,21 @@
-import { IUserDocument, IUserModel } from './users.types';
+import { UserDocument, UserModel, IUser } from './users.types';
 
 export async function findOneOrCreate(
-    this: IUserModel,
-    {
-        firstName,
-        lastName,
-        age
-    }: { firstName: string; lastName: string; age: number }
-): Promise<IUserDocument> {
-    const record = await this.findOne({ firstName, lastName, age });
+    this: UserModel,
+    user: IUser
+): Promise<UserDocument> {
+    const record = await this.findOne(user);
     if (record) {
         return record;
     } else {
-        return this.create({ firstName, lastName, age });
+        return this.create(user);
     }
 }
 
 export async function findByAge(
-    this: IUserModel,
+    this: UserModel,
     min?: number,
     max?: number
-): Promise<IUserDocument[]> {
+): Promise<UserDocument[]> {
     return this.find({ age: { $gte: min || 0, $lte: max || Infinity } });
 }

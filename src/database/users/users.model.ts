@@ -1,8 +1,17 @@
 import * as Mongoose from 'mongoose';
 import UserSchema from './users.schema';
-import { IUserDocument, IUserModel } from './users.types';
+import { UserDocument, UserModel } from './users.types';
 
-export const UserModel: IUserModel = Mongoose.model<IUserDocument>(
-    'user',
-    UserSchema
-) as IUserModel;
+export class User {
+    private _model: UserModel;
+    constructor() {
+        this._model = Mongoose.model<UserDocument, UserModel>(
+            'user',
+            UserSchema
+        );
+    }
+
+    public get model(): UserModel {
+        return this._model;
+    }
+}

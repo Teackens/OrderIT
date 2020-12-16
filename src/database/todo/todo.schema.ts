@@ -1,11 +1,11 @@
 import { Schema } from 'mongoose';
 import { sameTitle, setLastUpdated } from './todo.methods';
 import { findByCreatedUser, findOneOrCreate } from './todo.statics';
+import { ITodo } from './todo.types';
 
-const UserSchema = new Schema({
-    firstName: String,
-    lastName: String,
-    age: Number,
+const TodoSchema: Schema<ITodo> = new Schema({
+    title: String,
+    description: String,
     dateOfEntry: {
         type: Date,
         default: new Date()
@@ -16,10 +16,10 @@ const UserSchema = new Schema({
     }
 });
 
-UserSchema.statics.findOneOrCreate = findOneOrCreate;
-UserSchema.statics.findByCreatedUser = findByCreatedUser;
+TodoSchema.statics.findOneOrCreate = findOneOrCreate;
+TodoSchema.statics.findByCreatedUser = findByCreatedUser;
 
-UserSchema.methods.setLastUpdated = setLastUpdated;
-UserSchema.methods.sameTitle = sameTitle;
+TodoSchema.methods.setLastUpdated = setLastUpdated;
+TodoSchema.methods.sameTitle = sameTitle;
 
-export default UserSchema;
+export default TodoSchema;

@@ -1,8 +1,19 @@
-import * as Mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import TodoSchema from './todo.schema';
-import { ITodoDocument, ITodoModel } from './todo.types';
+import { TodoModel, TodoDocument } from './todo.types';
 
-export const TodoModel: ITodoModel = Mongoose.model<ITodoDocument>(
-    'todo',
-    TodoSchema
-) as ITodoModel;
+export class Todo {
+    private _model: TodoModel;
+
+    constructor() {
+        this._model = mongoose.model<TodoDocument, TodoModel>(
+            'todo',
+            TodoSchema,
+            'todo-list'
+        );
+    }
+
+    public get model(): TodoModel {
+        return this._model;
+    }
+}

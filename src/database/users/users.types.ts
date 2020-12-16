@@ -8,23 +8,23 @@ export interface IUser {
     lastUpdated?: Date;
 }
 
-export interface IUserDocument extends IUser, Document {
-    setLastUpdated: (this: IUserDocument) => Promise<void>;
-    sameLastName: (this: IUserDocument) => Promise<Document[]>;
+export interface UserDocument extends IUser, Document {
+    setLastUpdated: (this: UserDocument) => Promise<void>;
+    sameLastName: (this: UserDocument) => Promise<Document[]>;
 }
 
-export interface IUserModel extends Model<IUserDocument> {
+export interface UserModel extends Model<UserDocument> {
     findOneOrCreate: (
-        this: IUserModel,
+        this: UserModel,
         {
             firstName,
             lastName,
             age
         }: { firstName: string; lastName: string; age: number }
-    ) => Promise<IUserDocument>;
+    ) => Promise<UserDocument>;
     findByAge: (
-        this: IUserModel,
+        this: UserModel,
         min?: number,
         max?: number
-    ) => Promise<IUserDocument[]>;
+    ) => Promise<UserDocument[]>;
 }

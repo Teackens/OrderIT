@@ -1,45 +1,48 @@
-import mongoose from 'mongoose';
-import { UserModel } from './users/users.model';
-import { TodoModel } from './todo/todo.model';
-import { IUserModel } from './users/users.types';
-import { ITodoModel } from './todo/todo.types';
+import { connect, connection, Connection } from 'mongoose';
+import { Todo } from './todo/todo.model';
+import { User } from './users/users.model';
+import { UserModel } from './users/users.types';
+import { TodoModel } from './todo/todo.types';
+import { __MONGO_URI__ } from '../utils/config';
 
-let database: mongoose.Connection;
+interface IModels {
+    User: UserModel;
+    Todo: TodoModel;
+}
 
-export const connect = (): { UserModel: IUserModel; TodoModel: ITodoModel } => {
-    // add your own uri below
-    const uri = 'mongodb://127.0.0.1:27017';
+export class DB {
+    private static instance: DB;
 
-    if (database) {
-        console.log('there is a db connection');
-        return { UserModel, TodoModel };
-    }
-    try {
-        mongoose.connect(uri, {
+    private _db: Connection;
+    private _models: IModels;
+
+    private constructor() {
+        connect(__MONGO_URI__, {
             useNewUrlParser: true,
-            useFindAndModify: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true
+            useUnifiedTopology: true
         });
+        this._db = connection;
+        this._db.on('open', this.connected);
+        this._db.on('error', this.error);
 
-        database = mongoose.connection;
-        database.once('open', async () => {
-            console.log('Connected to database');
-        });
-
-        database.on('error', () => {
-            console.log('Error connecting to database');
-        });
-    } catch (error) {
-        console.error(error);
+        this._models = {
+            User: new User().model,
+            Todo: new Todo().model
+        };
     }
 
-    return { UserModel, TodoModel };
-};
-
-export const disconnect = (): void => {
-    if (!database) {
-        return;
+    public static get Models(): IModels {
+        if (!DB.instance) {
+            DB.instance = new DB();
+        }
+        return DB.instance._models;
     }
-    mongoose.disconnect();
-};
+
+    private connected() {
+        console.log('Mongoose has connected');
+    }
+
+    private error(error: Error) {
+        console.log('Mongoose has errored', error);
+    }
+}

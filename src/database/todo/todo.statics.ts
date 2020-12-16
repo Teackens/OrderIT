@@ -1,25 +1,21 @@
 import { ObjectId } from 'mongoose';
-import { ITodoDocument, ITodoModel } from './todo.types';
+import { TodoDocument, TodoModel, ITodo } from './todo.types';
 
 export async function findOneOrCreate(
-    this: ITodoModel,
-    {
-        title,
-        description,
-        user_id
-    }: { title: string; description: string; user_id: ObjectId }
-): Promise<ITodoDocument> {
-    const record = await this.findOne({ title, description, user_id });
+    this: TodoModel,
+    Todo: ITodo
+): Promise<TodoDocument> {
+    const record = await this.findOne(Todo);
     if (record) {
         return record;
     } else {
-        return this.create({ title, description, user_id });
+        return this.create(Todo);
     }
 }
 
 export async function findByCreatedUser(
-    this: ITodoModel,
+    this: TodoModel,
     user_id: ObjectId
-): Promise<ITodoDocument[]> {
+): Promise<TodoDocument[]> {
     return this.find({ _id: user_id });
 }
