@@ -43,7 +43,7 @@ jobs:
         timeout-minutes: 10
 
     - name: Code Coverage report
-      run: npm run coverage
+      run: npm run test-coverage
 
     - name: Check format with prettier/lint
       run: npm run prettier-format-check && npm run lint
