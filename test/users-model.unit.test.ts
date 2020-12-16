@@ -1,14 +1,15 @@
 import { suite, test } from '@testdeck/mocha';
-import { expect } from 'chai';
+import * as _chai from 'chai';
 import { DB } from '../src/database/database';
 import { IUser, UserDocument } from '../src/database/users/users.types';
 
+_chai.should();
 @suite
 class UserModelUnitTests {
     UserData: IUser;
     UserDocument: UserDocument;
 
-    before() {
+    constructor() {
         this.UserData = {
             age: 27,
             firstName: 'Daniel',
@@ -18,17 +19,22 @@ class UserModelUnitTests {
         this.UserDocument.save();
     }
 
-    @test 'should contain property age'() {
-        expect(this.UserDocument).has.property('age', this.UserData.age);
+    @test
+    'should contain property age'() {
+        this.UserDocument.should.have.property('age', this.UserData.age);
     }
-    @test 'should contain property firstname'() {
-        expect(this.UserDocument).has.property(
+
+    @test
+    'should contain property firstname'() {
+        this.UserDocument.should.have.property(
             'firstName',
             this.UserData.firstName
         );
     }
-    @test 'should contain property lastName'() {
-        expect(this.UserDocument).has.property(
+
+    @test
+    'should contain property lastName'() {
+        this.UserDocument.should.have.property(
             'lastName',
             this.UserData.lastName
         );
