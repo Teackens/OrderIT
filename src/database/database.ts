@@ -39,11 +39,11 @@ export class DB {
     }
 
     private connected() {
-        console.log('Mongoose has connected');
+        // console.log('Mongoose has connected');
     }
 
     private error(error: Error) {
-        console.log('Mongoose has errored', error);
+        // console.log('Mongoose has errored', error);
     }
 
     public static Disconnect(): void {

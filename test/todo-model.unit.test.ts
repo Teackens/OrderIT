@@ -3,6 +3,7 @@ import * as _chai from 'chai';
 import { DB } from '../src/database/database';
 import { ITodo, TodoDocument } from '../src/database/todo/todo.types';
 
+_chai.should().not.equal;
 @suite
 class TodoModelUnitTests {
     TodoData: ITodo;

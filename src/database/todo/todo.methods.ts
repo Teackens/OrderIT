@@ -1,4 +1,3 @@
-import { Document } from 'mongoose';
 import { TodoDocument } from './todo.types';
 
 export async function setLastUpdated(this: TodoDocument): Promise<void> {
@@ -8,6 +7,6 @@ export async function setLastUpdated(this: TodoDocument): Promise<void> {
         await this.save();
     }
 }
-export async function sameTitle(this: TodoDocument): Promise<Document[]> {
+export async function sameTitle(this: TodoDocument): Promise<TodoDocument[]> {
     return this.model('todo').find({ title: this.title });
 }

@@ -1,19 +1,21 @@
-// import express, { Request, Response } from 'express';
-// import { Todo } from '../database/todo/todo';
+import express, { Request, Response } from 'express';
+import { DB } from '../database/database';
+import { ITodo, TodoDocument } from '../database/todo/todo.types';
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.get('/api/todo', async (req: Request, res: Response) => {
-//   const todo = await Todo.find({});
-//   return res.status(200).send(todo);
-// });
+router.get('/api/todo', async (req: Request, res: Response) => {
+    console.log(req.body);
+    const todo = await DB.Models.Todo.find(req.body);
+    return res.status(200).send(todo);
+});
 
-// router.post('/api/todo', async (req: Request, res: Response) => {
-//   const { title, description } = req.body;
+router.post('/api/todo', async (req: Request, res: Response) => {
+    const todoData: ITodo = req.body;
 
-//   const todo = Todo.build({ title, description });
-//   await todo.save();
-//   return res.status(201).send(todo);
-// });
+    const todo: TodoDocument = new DB.Models.Todo(todoData);
+    await todo.save();
+    return res.status(201).send(todo);
+});
 
-// export { router as toDoRouter };
+export { router as todoRouter };

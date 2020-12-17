@@ -1,15 +1,16 @@
 import express from 'express';
 import { json } from 'body-parser';
-import { DB } from './database/database';
 import './utils/config';
-// import { toDoRouter } from './routes/todo';
+import { todoRouter } from './routes/todo';
+import { userRouter } from './routes/users';
 
 const app = express();
 app.use(json());
-// app.use(toDoRouter);
-
-//new DB();
+app.use(todoRouter);
+app.use(userRouter);
 
 app.listen(3000, () => {
     console.log('server is listening on port 3000');
 });
+
+export { app as ExpressApp };
