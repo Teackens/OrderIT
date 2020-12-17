@@ -12,7 +12,7 @@
     "dev:build": "tsc -w",
     "dev:run": "nodemon build/server.js",
     "dev": "concurrently npm:dev:*",
-    "test": "./node_modules/.bin/_mocha -r ts-node/register --exit test/**/*.test.ts",
+    "test": "./node_modules/.bin/_mocha -r ts-node/register test/**/*.test.ts",
     "test-coverage": "nyc npm run test",
     "start": "npm run build && node build/server.js"
   },

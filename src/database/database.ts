@@ -45,4 +45,10 @@ export class DB {
     private error(error: Error) {
         console.log('Mongoose has errored', error);
     }
+
+    public static Disconnect(): void {
+        if (DB.instance) {
+            DB.instance._db.close();
+        }
+    }
 }

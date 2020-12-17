@@ -17,6 +17,7 @@ class UserModelUnitTests {
         };
         this.UserDocument = new DB.Models.User(this.UserData);
         this.UserDocument.save();
+        DB.Disconnect();
     }
 
     @test

@@ -3,7 +3,6 @@ import * as _chai from 'chai';
 import { DB } from '../src/database/database';
 import { ITodo, TodoDocument } from '../src/database/todo/todo.types';
 
-_chai.should();
 @suite
 class TodoModelUnitTests {
     TodoData: ITodo;
@@ -15,6 +14,7 @@ class TodoModelUnitTests {
         };
         this.todoDocument = new DB.Models.Todo(this.TodoData);
         this.todoDocument.save();
+        DB.Disconnect();
     }
 
     @test 'should contain property title'() {
